@@ -31,4 +31,4 @@
 *.out
 *.app
 
-02_compiler/build/
+**/build/

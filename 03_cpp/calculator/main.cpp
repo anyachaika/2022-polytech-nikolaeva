@@ -6,8 +6,6 @@ int main() {
 	int i;
 	std::cin >> i;
 	
-	std::string result;
-	//std::cin >> std::noskipws; //don't skip whitespaces
 	char c;
 	std::cin >> c;
 

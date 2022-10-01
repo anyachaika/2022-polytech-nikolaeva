@@ -37,7 +37,7 @@ int binarySearch(const int *a, int n, int x) {
 }
 
 int main() {
-    std::cout << "Linear:" << linearSearch(A, N, 120) << std::endl;
-    std::cout << "Binary:" << binarySearch(A, N, 120) << std::endl;
+    std::cout << "Linear: " << linearSearch(A, N, 120) << std::endl;
+    std::cout << "Binary: " << binarySearch(A, N, 120) << std::endl;
     return 0;
 }

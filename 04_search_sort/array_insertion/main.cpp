@@ -42,7 +42,7 @@ int main() {
         A[i] = i * 2;
     print(A, N);
     std::cout << "35 must be on position " << search_position(99, A, N) << std::endl;
-    std::cout << "5 must be on position " << search_position(3, A, N) << std::endl;
+    std::cout << "5 must be on position " << search_position(5, A, N) << std::endl;
     std::cout << std::endl;
     return 0;
 }

@@ -19,6 +19,10 @@ int search_position(int x, const int* arr, int n) {
     return n;
 }
 
+void insert_sorted(int x, int*& arr, int &n) {
+    insert(x, search_position(x, arr, n), arr, n);
+}
+
 void print(int* arr, int n) {
     for (int i = 0; i < n; i++)
         std::cout << arr[i] << " ";
@@ -44,5 +48,17 @@ int main() {
     std::cout << "35 must be on position " << search_position(99, A, N) << std::endl;
     std::cout << "5 must be on position " << search_position(5, A, N) << std::endl;
     std::cout << std::endl;
+
+    std::cout << "insert_sorted function" << std::endl;
+    std::cout << "Initial array: " << std::endl;
+    for (int i = 0; i < N; i++)
+        A[i] = i * 2 + 1;
+    print(A, N);
+    insert_sorted(16, A, N);
+    std::cout << "Array after insertion of " << 16 << ":" << std::endl;
+    print(A, N);
+    insert_sorted(6, A, N);
+    std::cout << "Array after insertion of " << 6 << ":" << std::endl;
+    print(A, N);
     return 0;
 }

@@ -14,6 +14,11 @@ void insert(int x, int p, int*& arr, int &n) {
     n++;
 }
 
+int search_position(int x, const int* arr, int n) {
+    for (int i = 0; i < n; i++) if (arr[i] >= x) return i;
+    return n;
+}
+
 void print(int* arr, int n) {
     for (int i = 0; i < n; i++)
         std::cout << arr[i] << " ";
@@ -29,6 +34,15 @@ int main() {
     insert(99, 4, A, N);
     std::cout << "Array after insertion: " << std::endl;
     print(A, N);
+    std::cout << std::endl;
+    
+    std::cout << "search_position function" << std::endl;
+    std::cout << "Initial array: " << std::endl;
+    for (int i = 0; i < N; i++)
+        A[i] = i * 2;
+    print(A, N);
+    std::cout << "35 must be on position " << search_position(99, A, N) << std::endl;
+    std::cout << "5 must be on position " << search_position(3, A, N) << std::endl;
     std::cout << std::endl;
     return 0;
 }

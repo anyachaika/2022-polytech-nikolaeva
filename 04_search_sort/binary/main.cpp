@@ -58,4 +58,3 @@ int main() {
     test(A4, 99);
     return 0;
 }
-

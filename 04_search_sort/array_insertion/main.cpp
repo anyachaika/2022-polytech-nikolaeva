@@ -1,64 +1,65 @@
 #include <iostream>
+#include <cassert>
 
-int N = 5;
-int* A = new int[5];
+int A[10] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
 
-void insert(int x, int p, int*& arr, int &n) {
-    int* tmp = new int[n + 1];
-    std::copy(arr, arr + n, tmp);
-    delete[] arr;
-    for (int i = n; i > p; i--)
-        tmp[i] = tmp[i - 1];
-    tmp[p] = x;
-    arr = tmp;
-    n++;
+int *insert(int x, int p, int arr[], int n) {
+    for (int i = n; i > p; i--) arr[i] = arr[i - 1];
+
+    arr[p] = x;
+    return arr;
 }
 
-int search_position(int x, const int* arr, int n) {
-    for (int i = 0; i < n; i++) if (arr[i] >= x) return i;
+int search_position(int x, int arr[], int n) {
+    for (int i = 0; i < n - 1; ++i) {
+        if (arr[i] >= x)
+            return i;
+    }
     return n;
 }
 
-void insert_sorted(int x, int*& arr, int &n) {
-    insert(x, search_position(x, arr, n), arr, n);
+int* insert_sorted(int arr[], int n, int x) {
+    int p = search_position(x, arr, n);
+    return insert(x, p, arr, n);
 }
 
 void print(int* arr, int n) {
-    for (int i = 0; i < n; i++)
+    for (int i = 0; i < n; i++) {
         std::cout << arr[i] << " ";
+    }
     std::cout << std::endl;
 }
 
 int main() {
-    std::cout << "insert function" << std::endl;
-    std::cout << "Initial array: " << std::endl;
-    for (int i = 0; i < N; i++)
-        A[i] = i;
-    print(A, N);
-    insert(99, 4, A, N);
-    std::cout << "Array after insertion: " << std::endl;
-    print(A, N);
-    std::cout << std::endl;
-    
-    std::cout << "search_position function" << std::endl;
-    std::cout << "Initial array: " << std::endl;
-    for (int i = 0; i < N; i++)
-        A[i] = i * 2;
-    print(A, N);
-    std::cout << "35 must be on position " << search_position(99, A, N) << std::endl;
-    std::cout << "5 must be on position " << search_position(5, A, N) << std::endl;
+    std::cout << "First array: " << std::endl;
+    int a0[10] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+    int expected_r0[11] = {0, 1, 2, 3, 100, 4, 5, 6, 7, 8, 9};
+    print(a0, 10);
+    int* r0 = insert(100, 4, a0, 10);
+    for (int i = 0; i < 11; ++i) assert(r0[i] == expected_r0[i]);
+    print(a0, 11);
     std::cout << std::endl;
 
-    std::cout << "insert_sorted function" << std::endl;
-    std::cout << "Initial array: " << std::endl;
-    for (int i = 0; i < N; i++)
-        A[i] = i * 2 + 1;
-    print(A, N);
-    insert_sorted(16, A, N);
-    std::cout << "Array after insertion of " << 16 << ":" << std::endl;
-    print(A, N);
-    insert_sorted(6, A, N);
-    std::cout << "Array after insertion of " << 6 << ":" << std::endl;
-    print(A, N);
+    std::cout << "Second array: " << std::endl;
+    int a1[4] = {1, 3, 5, 6};
+    print(a1, 4);
+    assert(search_position(5, a1, 4) == 2);
+    std::cout << "Position of 5: " << search_position(5, a1, 4) << std::endl;
+    std::cout << std::endl;
+
+    std::cout << "Third array: " << std::endl;
+    int a2[4] = {1, 3, 5, 6};
+    print(a2, 4);
+    assert(search_position(7, a2, 4) == 4);
+    std::cout << "Position of 7: " << search_position(7, a2, 4) << std::endl;
+    std::cout << std::endl;
+
+    std::cout << "Fourth array: " << std::endl;
+    int a3[10] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+    int expected_r3[11] = {0, 1, 2, 3, 4, 5, 5, 6, 7, 8, 9};
+    print(a3, 10);
+    int* r3 = insert_sorted(a3, 10, 5);
+    for (int i = 0; i < 11; ++i) assert(r3[i] == expected_r3[i]);
+    print(a3, 11);
     return 0;
 }
